@@ -9,10 +9,10 @@ class VioletContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 32.0),
       margin: const EdgeInsets.symmetric(vertical: 16.0),
       width: size.width,
-      height: size.height * 0.25,
+      //height: size.height * 0.25,
       color: violetContainerColor,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
