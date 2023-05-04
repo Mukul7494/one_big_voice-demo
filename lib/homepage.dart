@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:one_big_voice/player/pages/player_page.dart';
 import 'package:one_big_voice/utils/about.dart';
 import 'package:one_big_voice/utils/constants.dart';
 import 'package:one_big_voice/utils/home.dart';
-import 'package:one_big_voice/utils/music.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -32,9 +32,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   List<Widget> _buildScreens() {
     return [
       const HomeView(),
-      const MusicView(),
+      // const MusicView(),
       const AboutOBV(),
       const LoginView(),
+      const PlayerPage()
     ];
   }
 
@@ -128,10 +129,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             icon: Icon(Icons.home),
             label: 'Home',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.music_note),
-            label: 'Music',
-          ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.music_note),
+          //   label: 'Music',
+          // ),
           BottomNavigationBarItem(
             icon: Icon(Icons.info),
             label: 'About',
@@ -139,6 +140,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           BottomNavigationBarItem(
             icon: Icon(Icons.login),
             label: 'Login',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.music_video_rounded),
+            label: 'Player',
           ),
         ],
         selectedItemColor: violet,

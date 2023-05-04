@@ -1,28 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:one_big_voice/utils/constants.dart';
 
-class MusicView extends StatefulWidget {
-  const MusicView({Key? key}) : super(key: key);
+import '../player/provider/music_data.dart';
 
-  static final list = [
-    "One Big Voice 21 – Donna Marwick-O’Brien (reimagined and in 3 parts for 2021)",
-    "Our Jigsaw Family – Nathan Cahill (specially written for OBV)",
-    "Real Big Kids – Brendan O’Brien (we are confronting bullying head on!)",
-    "Storming – Donna Marwick-O’Brien, Kiki McCormack, Brendan O’Brien (including our spectacular body percussion feature)",
-    "I Was Born – Hanson",
-    "Mary of York – Donna Marwick-O’Brien (Western Australian history)",
-    "Moondyne Joe – Jennifer Gaunt We’ve got your HaSS covered!",
-    "Somebody’s Child – Donna Marwick-O’Brien",
-    "From Now On – Benj Pasek, Justin Paul (students and teachers sing together)",
-    "Love Is In the Air – John Paul Young (Karaoke)",
-    "Unstoppable – Sia Furler, Chris Braide",
-  ];
+class MusicView extends ConsumerStatefulWidget {
+  const MusicView({super.key});
 
   @override
-  State<MusicView> createState() => _MusicViewState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _MusicViewState();
 }
 
-class _MusicViewState extends State<MusicView> with TickerProviderStateMixin {
+class _MusicViewState extends ConsumerState<MusicView> {
   bool isPlaying = false;
   int? indexPlaying;
   @override
@@ -32,13 +21,14 @@ class _MusicViewState extends State<MusicView> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    final musicList = ref.read(musicDataProvider);
     return Scaffold(
       body: ListView(
-        children: MusicView.list.map(
+        children: musicList.map(
           (e) {
-            final index = MusicView.list.indexOf(e);
-            final song = e.split(' – ')[0];
-            final artist = e.split(' – ')[1];
+            final index = musicList.indexOf(e);
+            final song = e.title;
+            final artist = e.artist;
             return Card(
               margin: const EdgeInsets.symmetric(
                 horizontal: 16.0,

@@ -14,12 +14,12 @@ class SideMenu extends StatelessWidget {
           DrawerHeader(
             child: Image.asset('assets/images/obv.png'),
           ),
-          const ListTile(
-            title: Text('OBV23 INFO'),
-          ),
-          const ListTile(
-            title: Text('Music Store'),
-          ),
+          // const ListTile(
+          //   title: Text('OBV23 INFO'),
+          // ),
+          // const ListTile(
+          //   title: Text('Music Store'),
+          // ),
           ListTile(
             onTap: () {
               Navigator.push(
@@ -31,12 +31,12 @@ class SideMenu extends StatelessWidget {
             },
             title: const Text('About OBV'),
           ),
-          const ListTile(
-            title: Text('Merchandise'),
-          ),
-          const ListTile(
-            title: Text('Sponsors'),
-          ),
+          // const ListTile(
+          //   title: Text('Merchandise'),
+          // ),
+          // const ListTile(
+          //   title: Text('Sponsors'),
+          // ),
         ],
       ),
     );

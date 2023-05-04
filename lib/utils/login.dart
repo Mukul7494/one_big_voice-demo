@@ -1,6 +1,7 @@
 import 'package:animated_login/animated_login.dart';
 import 'package:async/async.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -16,31 +17,33 @@ class _LoginViewState extends State<LoginView> {
   CancelableOperation? _operation;
   @override
   Widget build(BuildContext context) {
-    return AnimatedLogin(
-      onLogin: (LoginData data) async =>
-          _authOperation(LoginFunctions(context).onLogin(data)),
-      onSignup: (SignUpData data) async =>
-          _authOperation(LoginFunctions(context).onSignup(data)),
-      onForgotPassword: _onForgotPassword,
-      signUpMode: SignUpModes.both,
-      validateEmail: true,
-      loginMobileTheme: _mobileTheme,
-      validatePassword: false,
-      emailValidator: ValidatorModel(
-          validatorCallback: (String? email) => 'What an email! $email'),
-      initialMode: currentMode,
-      onAuthModeChange: (AuthMode newMode) async {
-        currentMode = newMode;
-        await _operation?.cancel();
-      },
-      privacyPolicyChild: const SizedBox.shrink(),
-      checkboxCallback: (value) => print('Checkbox value: $value'),
-      validateCheckbox: false,
-      loginTexts: LoginTexts(
-        privacyPolicyLink: 'Privacy Policy',
-        privacyPolicyText: 'privacy policy',
-        termsConditionsLink: 'Terms & Conditions',
-        termsConditionsText: 'terms & conditions',
+    return SafeArea(
+      child: AnimatedLogin(
+        onLogin: (LoginData data) async =>
+            _authOperation(LoginFunctions(context).onLogin(data)),
+        onSignup: (SignUpData data) async =>
+            _authOperation(LoginFunctions(context).onSignup(data)),
+        onForgotPassword: _onForgotPassword,
+        signUpMode: SignUpModes.both,
+        validateEmail: true,
+        loginMobileTheme: _mobileTheme,
+        validatePassword: false,
+        emailValidator: ValidatorModel(
+            validatorCallback: (String? email) => 'Want an email! $email'),
+        initialMode: currentMode,
+        onAuthModeChange: (AuthMode newMode) async {
+          currentMode = newMode;
+          await _operation?.cancel();
+        },
+        privacyPolicyChild: const SizedBox.shrink(),
+        checkboxCallback: (value) => print('Checkbox value: $value'),
+        validateCheckbox: false,
+        loginTexts: LoginTexts(
+          privacyPolicyLink: 'Privacy Policy',
+          privacyPolicyText: 'privacy policy',
+          termsConditionsLink: 'Terms & Conditions',
+          termsConditionsText: 'terms & conditions',
+        ),
       ),
     );
   }
@@ -89,7 +92,7 @@ class _LoginViewState extends State<LoginView> {
           AnimatedComponent(component: LoginComponents.actionButton),
         ],
         privacyPolicyStyle: const TextStyle(color: Colors.white),
-        privacyPolicyLinkStyle: TextStyle(
+        privacyPolicyLinkStyle: const TextStyle(
           color: Colors.white,
           decoration: TextDecoration.underline,
         ),
@@ -191,6 +194,7 @@ class LoginFunctions {
   /// Login action that will be performed on click to action button in login mode.
   Future<String?> onLogin(LoginData loginData) async {
     await Future.delayed(const Duration(seconds: 2));
+    context.go("/HomePage");
     return null;
   }
 
